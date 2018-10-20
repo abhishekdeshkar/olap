@@ -127,17 +127,43 @@
 		array('city_id' => 9, 'city_name' => 'Kolkata', 'model_id'=>1, 'model_name'=>'S9','brand_name' =>'Samsung' ,'model_cost' => 57000,'date'=>22,'month' => 9,'year'=>'2015','cust_id' =>26 ),
 
     );
+
+	ComeHere:
 		
-    $SliceCube 	= Slice($Customer);
+	echo "Please choose an operation. \n================\n";
 
-    $DiceCube 	=  Dice($Location,$Customer);
+	echo "1. Press 1 to perform Roll Up operation.\n2. Press 2 to perform Drill Down Operation.\n3. Press 3 to perform Slice operation.\n4. Press 4 to perform Dice operation. \n \n";
 
-    // echo print_r(RollUpOperation($FactTable));
-    // echo print_r(Slice($Customer));
-    // echo print_r(Dice($Location,$Customer));
-    
+	$handle = fopen ("php://stdin","r");
+	$line = trim(fgets($handle));
 
-	echo DrillDownOperation($FactTable);
+	switch ($line) 
+	{
+		case "1":
+			
+			echo RollUpOperation($FactTable);
+
+		break;
+
+		case '2':
+			echo DrillDownOperation($FactTable);
+		break;
+
+		case '3':
+			echo "<pre>".print_r(Slice($Customer),1)."</pre>";
+		break;
+
+		case '4':
+			echo "<pre>".print_r(Dice($Location,$Customer),1)."</pre>";
+		break;
+
+		
+		default:
+			//Wrong choice or invalid input so ask questions again.
+			goto ComeHere;
+		break;
+	}
+   
 	
 
 	function DrillDownOperation($FactTable)
